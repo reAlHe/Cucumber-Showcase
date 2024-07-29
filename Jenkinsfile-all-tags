@@ -11,9 +11,14 @@ pipeline {
         stage('Nightly Build') {
             steps {
                 script {
+                    if (fileExists(FLAG_FILE)) {
                         echo 'Running all tests'
                         // sh './gradlew clean test'
                         sh './gradlew clean'
+                    }
+                    else {
+                        echo 'No changes, nothing to do'
+                    }
                 }
             }
         }
