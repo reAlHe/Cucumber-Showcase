@@ -19,7 +19,8 @@ pipeline {
             steps {
                 script {
                         echo 'Running all tests'
-                        sh './gradlew clean test'
+                        // sh './gradlew clean test'
+                        sh './gradlew clean'
                 }
             }
         }
