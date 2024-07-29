@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    environment {
+        FLAG_FILE = '/var/jenkins_home/shared/scm_change_detected.flag'
+    }
+    triggers {
+        cron('H/5 * * * *') // Runs at 2 AM every night
+    }
+    stages {
+        stage('Nightly Build') {
+            steps {
+                script {
+                    def changeDetected = false
+                    if (fileExists(FLAG_FILE)) {
+                        changeDetected = readFile(FLAG_FILE).trim() == 'true'
+                    }
+
+                    if (changeDetected) {
+                        echo 'Running all tests'
+                        sh 'gradle clean test'
+                    } else {
+                        echo 'No SCM changes detected, skipping nightly job.'
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                if (fileExists(FLAG_FILE)) {
+                    deleteFile FLAG_FILE
+                }
+            }
+        }
+    }
+}
