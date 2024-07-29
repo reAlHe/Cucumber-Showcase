@@ -1,33 +1,10 @@
 pipeline {
     agent any
-    environment {
-        FLAG_FILE = "${env.WORKSPACE}/scm_change_detected.flag"
-        DISPLAY = ':99'
-    }
-    triggers {
-        cron('*/5 * * * *') // Runs at 2 AM every night
-    }
     stages {
-        stage('Nightly Build') {
+        stage('Test all tags') {
             steps {
                 script {
-                    if (fileExists(FLAG_FILE)) {
-                        echo 'Running all tests'
-                        // sh './gradlew clean test'
                         sh './gradlew clean'
-                    }
-                    else {
-                        echo 'No changes, nothing to do'
-                    }
-                }
-            }
-        }
-    }
-    post {
-        always {
-            script {
-                if (fileExists(FLAG_FILE)) {
-                    deleteFile FLAG_FILE
                 }
             }
         }

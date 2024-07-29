@@ -4,7 +4,7 @@ pipeline {
         FLAG_FILE = "${env.WORKSPACE}/scm_change_detected.flag"
     }
     triggers {
-        pollSCM('*/1 * * * *') // Checks for SCM changes every minute
+        pollSCM('H/1 * * * *') // Checks for SCM changes every minute
     }
     stages {
         stage('SCM Change Detection') {
