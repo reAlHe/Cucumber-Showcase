@@ -20,7 +20,7 @@ pipeline {
 
                     if (changeDetected) {
                         echo 'Running high prioritized tests'
-                        sh 'gradle clean test -Pcucumber.tags="@firefox"'
+                        sh './gradlew clean test -Pcucumber.tags="@firefox"'
                         writeFile file: FLAG_FILE, text: 'true'
                     }
                 }

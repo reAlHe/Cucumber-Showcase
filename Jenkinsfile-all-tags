@@ -17,7 +17,7 @@ pipeline {
 
                     if (changeDetected) {
                         echo 'Running all tests'
-                        sh 'gradle clean test'
+                        sh './gradlew clean test'
                     } else {
                         echo 'No SCM changes detected, skipping nightly job.'
                     }
