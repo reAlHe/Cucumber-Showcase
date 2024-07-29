@@ -7,7 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -22,10 +24,14 @@ public class HerokuAppSteps {
     @Given("I am using the {string} browser")
     public void i_am_using_the_browser(String browser) {
         if (browser.equalsIgnoreCase("Chrome")) {
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            driver = new ChromeDriver(options);
         }
         else {
-            driver = new FirefoxDriver();
+            FirefoxOptions options = new FirefoxOptions();
+            options.setHeadless(true);
+            driver = new FirefoxDriver(options);
         }
     }
 
