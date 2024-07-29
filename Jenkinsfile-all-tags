@@ -10,17 +10,8 @@ pipeline {
         stage('Nightly Build') {
             steps {
                 script {
-                    def changeDetected = false
-                    if (fileExists(FLAG_FILE)) {
-                        changeDetected = readFile(FLAG_FILE).trim() == 'true'
-                    }
-
-                    if (changeDetected) {
                         echo 'Running all tests'
                         sh './gradlew clean test'
-                    } else {
-                        echo 'No SCM changes detected, skipping nightly job.'
-                    }
                 }
             }
         }
