@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        FLAG_FILE = '/var/jenkins_home/shared/scm_change_detected.flag'
+        FLAG_FILE = "${env.WORKSPACE}/scm_change_detected.flag"
         DISPLAY = ':99'
     }
     triggers {
