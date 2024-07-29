@@ -22,11 +22,9 @@ public class HerokuAppSteps {
     @Given("I am using the {string} browser")
     public void i_am_using_the_browser(String browser) {
         if (browser.equalsIgnoreCase("Chrome")) {
-            System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
             driver = new ChromeDriver();
         }
         else {
-            System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
             driver = new FirefoxDriver();
         }
     }

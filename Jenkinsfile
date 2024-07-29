@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                         echo 'Running high prioritized tests'
-                        sh './gradlew clean test -Pcucumber.tags="@firefox"'
+                        sh './gradlew clean test -Pcucumber.tags="@firefox" -d'
                         writeFile file: FLAG_FILE, text: 'true'
                 }
             }
