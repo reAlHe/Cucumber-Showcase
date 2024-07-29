@@ -22,26 +22,13 @@ public class HerokuAppSteps {
     @Given("I am using the {string} browser")
     public void i_am_using_the_browser(String browser) {
         if (browser.equalsIgnoreCase("Chrome")) {
-            // Path to chromedriver executable
-//            System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-
+            System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
             driver = new ChromeDriver();
         }
         else {
             System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
             driver = new FirefoxDriver();
         }
-
-
-//        DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability("browserstack.user", BROWSERSTACK_USERNAME);
-//        capabilities.setCapability("browserstack.key", BROWSERSTACK_ACCESS_KEY);
-//        capabilities.setCapability("build", "Cucumber Test Build");
-//
-//        capabilities.setCapability("browser", browser);
-//        capabilities.setCapability("browser_version", "latest");
-//
-//        driver = new RemoteWebDriver(new URL(BROWSERSTACK_URL), capabilities);
     }
 
     @Given("I am on the Heroku Form Authentication Page")
