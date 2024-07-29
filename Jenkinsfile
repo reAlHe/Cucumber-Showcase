@@ -5,7 +5,7 @@ pipeline {
         DISPLAY = ':99'
     }
     triggers {
-        pollSCM('H/1 * * * *') // Checks for SCM changes every minute
+        pollSCM('*/1 * * * *') // Checks for SCM changes every minute
     }
     stages {
         stage('Start Xvfb') {

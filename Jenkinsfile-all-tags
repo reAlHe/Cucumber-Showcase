@@ -5,7 +5,7 @@ pipeline {
         DISPLAY = ':99'
     }
     triggers {
-        cron('H/5 * * * *') // Runs at 2 AM every night
+        cron('*/5 * * * *') // Runs at 2 AM every night
     }
     stages {
         stage('Start Xvfb') {
