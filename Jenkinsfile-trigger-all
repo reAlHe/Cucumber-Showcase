@@ -14,19 +14,11 @@ pipeline {
                     if (fileExists(FLAG_FILE)) {
                         echo 'Trigger pipeline for all tests'
                         build job: 'extended-test-suite', wait: true
+                        sh 'rm FLAG_FILE'
                     }
                     else {
                         echo 'No changes, nothing to do'
                     }
-                }
-            }
-        }
-    }
-    post {
-        always {
-            script {
-                if (fileExists(FLAG_FILE)) {
-                     sh 'rm FLAG_FILE'
                 }
             }
         }
