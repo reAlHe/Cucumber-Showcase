@@ -4,6 +4,7 @@ pipeline {
         stage('Test all tags') {
             steps {
                 script {
+                        echo 'Running all tests'
                         sh './gradlew clean'
                 }
             }

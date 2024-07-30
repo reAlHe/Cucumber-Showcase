@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        FLAG_FILE = "${env.WORKSPACE}/scm_change_detected.flag"
+        FLAG_FILE = "trigger-all-tests.flag"
     }
     triggers {
         pollSCM('H/1 * * * *') // Checks for SCM changes every minute
@@ -14,6 +14,7 @@ pipeline {
 //                         sh './gradlew clean test -Pcucumber.tags="@firefox"'
                         sh './gradlew clean'
                         writeFile file: FLAG_FILE, text: 'true'
+                        archiveArtifacts artifacts: FLAG_FILE, allowEmptyArchive: true
                 }
             }
         }

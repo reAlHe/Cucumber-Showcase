@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        FLAG_FILE = "${env.WORKSPACE}/scm_change_detected.flag"
+        FLAG_FILE = "trigger-all-tests.flag"
     }
     triggers {
         cron('H/2 * * * *') // Runs at 2 AM every night
@@ -9,9 +9,10 @@ pipeline {
     stages {
         stage('Trigger nightly test for all tags') {
             steps {
+                copyArtifacts projectName: 'continuous-build', filter: FLAG_FILE
                 script {
                     if (fileExists(FLAG_FILE)) {
-                        echo 'Running all tests'
+                        echo 'Trigger pipeline for all tests'
                         build job: 'extended-test-suite', wait: true
                     }
                     else {
