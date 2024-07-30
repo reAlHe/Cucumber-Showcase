@@ -25,7 +25,7 @@ pipeline {
         always {
             script {
                 if (fileExists(FLAG_FILE)) {
-                    deleteFile FLAG_FILE
+                    sh 'rm FLAG_FILE'
                 }
             }
         }
