@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'BROWSER', defaultValue: '', description: 'Parameter from triggering pipeline')
+    }
+    stages {
+        stage('Process Parameter') {
+            steps {
+                script {
+                    echo "Received parameter: ${BROWSER}"
+                }
+            }
+        }
+    }
+}

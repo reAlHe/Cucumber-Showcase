@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Create and trigger dynamic stages sequentially') {
+            steps {
+                script {
+                    def values = ['Chrome', 'Firefox', 'Edge']
+
+                    for (int i = 0; i < values.size(); i++) {
+                        def value = values[i]
+
+                        stage("Stage ${i + 1} - ${value}") {
+                            echo "Triggering pipeline with parameter: ${value}"
+
+                            build job: 'name-des-anderen-jobs',
+                                  parameters: [
+                                      string(name: 'BROWSER', value: value)
+                                  ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
