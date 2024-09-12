@@ -11,13 +11,7 @@ pipeline {
 
                         stage("Stage ${i + 1} - ${value}") {
                             echo "Triggering pipeline with parameter: ${value}"
-
-                            steps {
-                                build (job: 'App-x-test',
-                                                              wait: true,
-                                                              parameters: [
-                                                                  string(name: 'BROWSER', value: value)
-                                                              ])
+                            build (job: 'App-x-test',wait: true, parameters: [string(name: 'BROWSER', value: value)])
                             }
                         }
                     }
