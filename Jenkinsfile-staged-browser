@@ -12,7 +12,7 @@ pipeline {
                         stage("Stage ${i + 1} - ${value}") {
                             echo "Triggering pipeline with parameter: ${value}"
 
-                            build job: 'name-des-anderen-jobs',
+                            build job: 'App-x-test',
                                   parameters: [
                                       string(name: 'BROWSER', value: value)
                                   ]
